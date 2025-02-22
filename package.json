@@ -1,25 +1,19 @@
 {
-  "name": "my-awesome-userscript",
-  "version": "1.0.2",
-  "description": "A Greasemonkey/Tampermonkey/Violentmonkey Bun + TypeScript boilerplate",
+  "name": "novel-chapter-auto-loader",
+  "version": "1.0.0",
+  "description": "Auto-loads next chapter for various novel reading sites",
   "module": "src/index.ts",
   "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/genzj/bun-ts-userscript-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/genzj/bun-ts-userscript-starter/issues"
-  },
-  "homepage": "https://github.com/genzj/bun-ts-userscript-starter#readme",
+  "homepage": "https://github.com/StarlessNight13/novel-chapter-auto-loader",
   "userscriptHeader": {
     "@match": [
-      "http*://example.com/",
-      "http*://www.example.com/"
+      "https://cenele.com/*",
+      "https://kolbook.xyz/*",
+      "https://rewayat.club/novel/*/*"
     ],
     "@grant": "GM_addStyle"
   },
-  "author": "genzj",
+  "author": "darklessnight",
   "license": "MIT",
   "devDependencies": {
     "@types/bun": "latest",
