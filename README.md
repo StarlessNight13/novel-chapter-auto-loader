@@ -1,6 +1,6 @@
 # Universal Chapter Auto-Loader
 
-This userscript automatically loads the next chapter for various novel reading sites with toggle, state saving, стилизация chapters from local storage and user options.
+This userscript automatically loads the next chapter for various novel reading sites with toggle, state saving chapters from local storage and user options.
 
 ## Features
 
