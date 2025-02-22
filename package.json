@@ -11,7 +11,17 @@
       "https://kolbook.xyz/*",
       "https://rewayat.club/novel/*/*"
     ],
-    "@grant": "GM_addStyle"
+    "@grant": "GM_addStyle",
+    "@name": "Novel Chapter Auto-Loader",
+    "@namespace": "https://github.com/StarlessNight13",
+    "@version": "1.0.0",
+    "@description": "Auto-loads next chapter for various novel reading sites",
+    "@license": "MIT",
+    "@author": "darklessnight"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StarlessNight13/novel-chapter-auto-loader.git"
   },
   "author": "darklessnight",
   "license": "MIT",
