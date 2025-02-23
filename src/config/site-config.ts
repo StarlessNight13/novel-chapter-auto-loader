@@ -8,15 +8,20 @@ import {
   openKolnovelSettings,
   openRewayatSettings,
 } from "../lib/openSettings";
+import {
+  appendCeneleToggle,
+  appendKolnovelToggle,
+  appendRewayatToggle,
+} from "../lib/toggle-setting";
 
 export const SITE_CONFIGS = {
   "cenele.com": {
     selectors: {
       nextLink: ".next_page",
-      contentContainer: ".text-right",
+      contentContainer: ".text-left",
       appendTo: ".reading-content",
       title: "#chapter-heading",
-      content: ".text-left",
+      content: ".text-right",
       removeElements: [
         ".social-share",
         ".entry-content_wrap > h2:nth-child(1)",
@@ -30,6 +35,7 @@ export const SITE_CONFIGS = {
     isChapterPage: () => true,
     stylesFunc: getCeneleStyle,
     openSettingsFunc: openCeneleSettings,
+    appendToggleFunc: appendCeneleToggle,
   },
   "rewayat.club": {
     selectors: {
@@ -47,6 +53,7 @@ export const SITE_CONFIGS = {
     isChapterPage: () => true,
     stylesFunc: getRewayatStyle,
     openSettingsFunc: openRewayatSettings,
+    appendToggleFunc: appendRewayatToggle,
   },
   "kolbook.xyz": {
     selectors: {
@@ -75,6 +82,7 @@ export const SITE_CONFIGS = {
     },
     stylesFunc: getKolnovelStyle,
     openSettingsFunc: openKolnovelSettings,
+    appendToggleFunc: appendKolnovelToggle,
   },
 };
 
@@ -93,4 +101,5 @@ export interface SiteConfig {
   };
   stylesFunc: () => Record<string, string>;
   openSettingsFunc: () => void;
+  appendToggleFunc: (setState: (value?: boolean) => void) => void;
 }

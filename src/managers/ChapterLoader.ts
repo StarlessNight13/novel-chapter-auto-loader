@@ -139,6 +139,8 @@ export class ChapterLoader {
     const contentElement = containerElement.querySelector(
       this.config.selectors.content
     );
+    console.log("🚀 ~ ChapterLoader ~ processChapterContent ~ contentElement:", contentElement)
+    console.log("🚀 ~ ChapterLoader ~ processChapterContent ~ containerElement:", containerElement)
     if (!contentElement) throw new Error("Content element not found");
     Object.assign(containerElement.style, contetStyle);
     return contentElement.innerHTML;
