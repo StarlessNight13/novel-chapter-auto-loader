@@ -139,8 +139,6 @@ export class ChapterLoader {
     const contentElement = containerElement.querySelector(
       this.config.selectors.content
     );
-    console.log("🚀 ~ ChapterLoader ~ processChapterContent ~ contentElement:", contentElement)
-    console.log("🚀 ~ ChapterLoader ~ processChapterContent ~ containerElement:", containerElement)
     if (!contentElement) throw new Error("Content element not found");
     Object.assign(containerElement.style, contetStyle);
     return contentElement.innerHTML;
@@ -200,10 +198,14 @@ export class ChapterLoader {
     this.cleanupOldChapters();
   }
 
-  // Cleanup old chapters
+  // Cleanup
   private cleanupOldChapters(): void {
     const chapters = document.querySelectorAll(".chapter-container");
-    if (chapters.length > UNIVERSAL_CONFIG.maxVisibleChapters) {
+    const userOptions = document.querySelectorAll(".chapter-user-options");
+    if (
+      chapters.length > UNIVERSAL_CONFIG.maxVisibleChapters ||
+      userOptions.length > UNIVERSAL_CONFIG.maxVisibleChapters
+    ) {
       chapters[0].remove();
     }
   }

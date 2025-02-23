@@ -1,3 +1,5 @@
+import { initializeChapterStyle as getCeneleStyle } from "./cenelStyle";
+
 // Kolnovel style function
 function getKolnovelStyle() {
   // --- Default Chapter Style Configuration ---
@@ -31,14 +33,15 @@ function getRewayatStyle() {
   // --- Default Chapter Style Configuration ---
   const DEFAULT_CHAPTER_STYLE_CONFIG = {
     fontSize: "16px",
-    fontFamily: "'Noto Kufi Arabic', sans-serif",
-    background: "transparent",
   };
   return DEFAULT_CHAPTER_STYLE_CONFIG;
 }
-// Cenele style function
-function getCeneleStyle() {
-  return {};
+
+function getCookie(cookieKey: string) {
+  const cookieValue = document.cookie.match(
+    `(^|;)\\s*${cookieKey}\\s*=\\s*([^;]+)`
+  );
+  return cookieValue ? cookieValue[1] : null;
 }
 
-export { getKolnovelStyle, getCeneleStyle, getRewayatStyle };
+export { getCeneleStyle, getKolnovelStyle, getRewayatStyle };
