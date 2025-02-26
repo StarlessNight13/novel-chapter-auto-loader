@@ -1,6 +1,9 @@
-export function appendCeneleToggle(setState: (value?: boolean) => void) {
+export function appendCeneleToggle(
+  setState: (value?: boolean) => void,
+  enabled: boolean
+) {
   // Toggle
-  const toggle = creatToggle();
+  const toggle = creatToggle(enabled);
   const section = document.createElement("section");
   const header = document.createElement("h4");
   header.textContent = "Auto Loader";
@@ -16,8 +19,11 @@ export function appendCeneleToggle(setState: (value?: boolean) => void) {
   }
 }
 
-export function appendKolnovelToggle(setState: (value?: boolean) => void) {
-  const toggle = creatToggle();
+export function appendKolnovelToggle(
+  setState: (value?: boolean) => void,
+  enabled: boolean
+) {
+  const toggle = creatToggle(enabled);
   const modal = document.querySelector(".optxshd") as HTMLDivElement | null;
   if (modal) {
     modal.appendChild(toggle);
@@ -25,8 +31,11 @@ export function appendKolnovelToggle(setState: (value?: boolean) => void) {
   }
 }
 
-export function appendRewayatToggle(setState: (value?: boolean) => void) {
-  const toggle = creatToggle();
+export function appendRewayatToggle(
+  setState: (value?: boolean) => void,
+  enabled: boolean
+) {
+  const toggle = creatToggle(enabled);
   const modal = document.querySelector(
     ".optx-content"
   ) as HTMLDivElement | null;
@@ -36,10 +45,31 @@ export function appendRewayatToggle(setState: (value?: boolean) => void) {
   }
 }
 
-function creatToggle() {
-  const toggle = document.createElement("button");
-  toggle.textContent = "Toggle Auto Loader";
-  toggle.id = "settings-toggle";
-  toggle.classList.add("btn-2");
-  return toggle;
+function creatToggle(enabled: boolean) {
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container"); // Add a class for styling if needed
+  toggleContainer.classList.add("btn"); // Add a class for styling if needed
+  toggleContainer.classList.add("btn-rect"); // Add a class for styling if needed
+  toggleContainer.id = "toggle-container";
+
+  // Create the input element of type checkbox, which will act as the toggle
+  const toggleInput = document.createElement("input");
+  toggleInput.type = "checkbox";
+  toggleInput.classList.add("checkbox"); // Add a class for styling if needed
+  toggleInput.checked = enabled;
+
+  // Create a span element to act as the visual "slider" or background of the toggle
+  const knob = document.createElement("span");
+  knob.classList.add("knob"); // Add a class for styling the slider
+
+  const btnBg = document.createElement("span");
+  btnBg.classList.add("btn-bg"); // Add a class for styling the slider
+
+  // Append the input and the slider to the container
+  toggleContainer.appendChild(toggleInput);
+  toggleContainer.appendChild(knob);
+  toggleContainer.appendChild(btnBg);
+
+  // Return the container element, which now holds the toggle
+  return toggleContainer;
 }

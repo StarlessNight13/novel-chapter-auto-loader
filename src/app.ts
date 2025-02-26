@@ -29,34 +29,48 @@ export class App {
 
   private initialize(): void {
     this.injectHTML();
-
-    if (this.config.autoLoaderEnabled) {
-      if (!this.config.chapterLoaderInstance) {
-        // Only create if not already exists
-        this.config.chapterLoaderInstance = this.isChapterPage();
-      }
-    } else {
-      this.config.chapterLoaderInstance = null; // Clear instance when disabled
+    this.config.autoLoaderEnabled = this.getAutoLoaderEnabledState();
+    const { isChapterPage, config } = this.isChapterPage();
+    if (this.config.autoLoaderEnabled && !this.config.chapterLoaderInstance) {
+      // Only create if not already exists
+      if (isChapterPage)
+        this.config.chapterLoaderInstance = this.createNewChapterLoader(config);
     }
-
     if (UNIVERSAL_CONFIG.debugMode) {
       console.log("Script successfully injected");
     }
   }
 
-  private isChapterPage(): ChapterLoader | null {
-    const hostname = window.location.hostname; // Get hostname without type assertion
+  private isChapterPage():
+    | {
+        isChapterPage: true;
+        config: SiteConfig;
+      }
+    | { isChapterPage: false; config: null } {
+    const hostname = window.location.hostname;
     if (!(hostname in this.siteConfigs)) {
       console.warn(`No site config found for hostname: ${hostname}`);
-      return null;
+      return { isChapterPage: false, config: null };
     }
     const config = this.siteConfigs[hostname as keyof typeof SITE_CONFIGS]; // Now safe to assert
 
     if (this.checkConditions(config.isChapterPage)) {
-      config.appendToggleFunc(this.setEnabled.bind(this)); // Bind 'this' to setEnabled
-      return new ChapterLoader(config);
+      config.appendToggleFunc(
+        this.setEnabled.bind(this),
+        this.config.autoLoaderEnabled
+      ); // Bind 'this' to setEnabled
+      return { isChapterPage: true, config };
     }
-    return null;
+    return { isChapterPage: false, config: null };
+  }
+
+  private createNewChapterLoader(config?: SiteConfig): ChapterLoader {
+    if (!config)
+      return new ChapterLoader(
+        this.siteConfigs[window.location.hostname as keyof typeof SITE_CONFIGS],
+        this.config.autoLoaderEnabled
+      );
+    return new ChapterLoader(config, this.config.autoLoaderEnabled);
   }
   /**
    * Toggles the autoLoaderEnabled state.
@@ -68,15 +82,25 @@ export class App {
     const newValue = value ?? !this.config.autoLoaderEnabled;
     if (this.config.autoLoaderEnabled !== newValue) {
       this.config.autoLoaderEnabled = newValue;
+      // Save the new state to localStorage
+      localStorage.setItem("autoLoaderEnabledState", String(newValue)); // Store as string 'true' or 'false'
+
       if (newValue && !this.config.chapterLoaderInstance) {
-        this.config.chapterLoaderInstance = this.isChapterPage(); // Create only when enabling
-      } else if (!newValue) {
-        this.config.chapterLoaderInstance = null; // Clear when disabling
+        this.config.chapterLoaderInstance = this.createNewChapterLoader(); // Create only when enabling
       }
       if (UNIVERSAL_CONFIG.debugMode) {
         console.log(`Auto loader is now ${newValue ? "enabled" : "disabled"}`);
       }
     }
+  }
+
+  private getAutoLoaderEnabledState(): boolean {
+    return localStorage.getItem("autoLoaderEnabledState") === "true";
+  }
+
+  private deleteAllchpers(): void {
+    const chapters = document.querySelectorAll(".chapter-container");
+    chapters.forEach((chapter) => chapter.remove());
   }
 
   private checkConditions(func: () => boolean): boolean {

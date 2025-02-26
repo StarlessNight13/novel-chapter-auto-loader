@@ -15,10 +15,94 @@ div:has(div > div > div > div > .adblock_title) {
   opacity: 0.5;
 }
 
-.chapter-container {
-  margin-top: 20px;
+//  Toggle
+.knob,
+.btn-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
-//  Buttons
+
+.btn {
+  position: relative;
+  top: 50%;
+  width: 74px;
+  height: 36px;
+  margin: -20px auto 0 auto;
+  overflow: hidden;
+}
+.btn.btn-rect {
+  border-radius: 2px;
+}
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.knob {
+  z-index: 2;
+}
+
+.btn-bg {
+  width: 100%;
+  background-color: #ebf7fc;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+#toggle-container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#toggle-container .knob:before {
+  content: "ON";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 10px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 9px 4px;
+  background-color: #03a9f4;
+  border-radius: 2px;
+  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#toggle-container .checkbox:active + .knob:before {
+  width: 46px;
+}
+
+#toggle-container .checkbox:checked:active + .knob:before {
+  margin-left: -26px;
+}
+
+#toggle-container .checkbox:checked + .knob:before {
+  content: "OFF";
+  left: 42px;
+  background-color: #f44336;
+}
+
+#toggle-container .checkbox:checked ~ .btn-bg {
+  background-color: #fcebeb;
+}
+
+// ======== Button
 
 .btn-1,
 .btn-1 *,

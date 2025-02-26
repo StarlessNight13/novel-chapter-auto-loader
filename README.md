@@ -37,3 +37,31 @@ You can customize the chapter options by editing the `SiteConfig` interface in t
 ## License
 
 This project is licensed under the MIT License.
+
+## Disclaimer
+
+This userscript is not affiliated with any novel reading sites or their respective authors. The userscript is provided as-is and is intended for personal use only.
+
+
+## Credits
+
+- Me, for writing this userscript. I am a genius.
+- chatGPT (he wrote the README aswell... :D), not as genius as me, but it's still a genius.
+- gemini flash2 - it's a genius, just like tom.
+- claude - was about to make JDSL... but then I stopped it.
+- supermaven - fast and smart, but not as smart as me.
+
+
+what is JDSL?
+
+JDSL is a JavaScript Domain Specific Language.
+```js
+// this is allowed in JDSL
+const false = true;
+
+if (false === false) {
+    return false
+} else {
+    return true
+}
+```

@@ -101,5 +101,8 @@ export interface SiteConfig {
   };
   stylesFunc: () => Record<string, string>;
   openSettingsFunc: () => void;
-  appendToggleFunc: (setState: (value?: boolean) => void) => void;
+  appendToggleFunc: (
+    setState: (value?: boolean) => void,
+    enabled: boolean
+  ) => void;
 }

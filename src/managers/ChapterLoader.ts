@@ -12,15 +12,16 @@ export class ChapterLoader {
   private isLoading: boolean;
   private readonly contentManager: ChapterContentManager;
   private readonly urlManager: URLManager;
+  private autoLoaderState: boolean;
 
-  constructor(config: SiteConfig) {
+  constructor(config: SiteConfig, autoLoaderState: boolean) {
     this.config = config;
     this.isLoading = false;
     this.nextChapterUrl = null;
     this.currentChapterNumber = 1;
     this.contentManager = new ChapterContentManager(config);
     this.urlManager = new URLManager(config);
-
+    this.autoLoaderState = autoLoaderState;
     this.init();
   }
 

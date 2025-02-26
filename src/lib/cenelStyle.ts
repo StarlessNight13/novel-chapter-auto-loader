@@ -68,6 +68,7 @@ function initializeChapterStyle(): ChapterStyle {
     });
   });
 
+  applyStyle(content, getCurrentStyle(chapter));
   return {
     fontSize: "var(--fontSize)",
     lineHeight: "var(--lineHeight)",
